@@ -63,7 +63,8 @@ const propTypes = {
   getInputRef: PropTypes.oneOfType([
     PropTypes.func, // for legacy refs
     PropTypes.shape({ current: PropTypes.any })
-  ])
+  ]),
+  beforeFormat: PropTypes.func
 };
 
 const defaultProps = {
@@ -751,6 +752,9 @@ class NumberFormat extends React.Component {
 
     inputValue =  this.correctInputValue(currentCaretPosition, lastValue, inputValue);
 
+    if (props.beforeFormat) {
+      inputValue = props.beforeFormat(inputValue);
+    }
     let formattedValue = this.formatInput(inputValue) || '';
     const numAsString = this.removeFormatting(formattedValue);
 
