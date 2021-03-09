@@ -391,7 +391,8 @@
     getInputRef: propTypes.oneOfType([propTypes.func, // for legacy refs
     propTypes.shape({
       current: propTypes.any
-    })])
+    })]),
+    beforeFormat: propTypes.func
   };
   var defaultProps = {
     displayType: 'input',
@@ -1133,6 +1134,11 @@
         var lastValue = state.value || '';
         var currentCaretPosition = getCurrentCaretPosition(el);
         inputValue = this.correctInputValue(currentCaretPosition, lastValue, inputValue);
+
+        if (props.beforeFormat) {
+          inputValue = props.beforeFormat(inputValue);
+        }
+
         var formattedValue = this.formatInput(inputValue) || '';
         var numAsString = this.removeFormatting(formattedValue);
         var valueObj = this.getValueObject(formattedValue, numAsString);
