@@ -92,5 +92,6 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
